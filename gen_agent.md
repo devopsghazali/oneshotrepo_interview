@@ -2,7 +2,7 @@
 
 ### 🏗️ Category 1: Infrastructure as AI-Code (IaC & GenAI)
 1. **Scenario-Based Prompting:** Agar aapko ek secure Azure VNet banana hai, toh "System Prompt" mein security guidelines (no public IPs) dena kyun zaroori hai?
-2. **Self-Correction Logic:** Agentic AI `terraform plan` ka error dekh kar khud code kaise fix karta hai?
+2. rag kya hai 
 3.  llm haluciantion kya hai 
 4. **Few-Shot Module Creation:** Purane modules ka context dekar naya resource generate karwane ki technique.
 5. promt engineering kya hai 
