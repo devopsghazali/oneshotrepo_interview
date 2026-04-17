@@ -3,9 +3,9 @@
 ### 🏗️ Category 1: Infrastructure as AI-Code (IaC & GenAI)
 1. **Scenario-Based Prompting:** Agar aapko ek secure Azure VNet banana hai, toh "System Prompt" mein security guidelines (no public IPs) dena kyun zaroori hai?
 2. **Self-Correction Logic:** Agentic AI `terraform plan` ka error dekh kar khud code kaise fix karta hai?
-3. **IaC Validation Agent:** Ek Agent jo Checkov ya Terrascan chalaye aur report summarize karke AI se fix karwaye.
+3.  llm haluciantion kya hai 
 4. **Few-Shot Module Creation:** Purane modules ka context dekar naya resource generate karwane ki technique.
-5. **Cross-Cloud Migration:** Ek Agent jo AWS CloudFormation ko read kare aur equivalent Azure Bicep code generate kare.
+5. promt engineering kya hai 
 
 ### ☸️ Category 2: Kubernetes & AIOps (The Agentic Edge)
 6. **The Log-Analyzer Agent:** CrashLoopBackOff ke logs read karke root cause batane wala LLM prompt structure.
