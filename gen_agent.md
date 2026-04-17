@@ -7,13 +7,107 @@
 4. **Few-Shot Module Creation:** Purane modules ka context dekar naya resource generate karwane ki technique.
 5. promt engineering kya hai 
 
-### ☸️ Category 2: Kubernetes & AIOps (The Agentic Edge)
-6. **The Log-Analyzer Agent:** CrashLoopBackOff ke logs read karke root cause batane wala LLM prompt structure.
-7. **LangGraph for Self-Healing:** Agar pod "Pending" hai, toh Agent kaise decide karega ki use Node affinity check karni hai ya Resource Quotas?
-8. **Semantic Cluster Search:** `kubectl grep` ke bajaye "Find all pods having networking issues" bolne par AI kaise dhoondta hai?
-9. **K8s Manifest Agent:** YAML indentation aur API versioning errors ko detect karne wala AI logic.
-10. **HPA Optimizer:** Agent jo Grafana metrics dekh kar `HorizontalPodAutoscaler` ki limits suggest kare.
+☸️ Scenario 1: The Log-Analyzer Agent
+Goal: CrashLoopBackOff ke logs se root cause dhoondna.
 
+📚 Prerequisites (Kya aana chahiye?):
+K8s Basics: Pod lifecycle aur status codes (Exit Code 0 vs 137 vs 1).
+
+Log Context: kubectl logs --previous ka concept (taaki crash hone se pehle kya hua wo pata chale).
+
+Prompt Engineering: Zero-Shot vs. Few-Shot (AI ko examples dena ki "Exit Code 137" ka matlab OOMKilled hota hai).
+
+🤖 Agentic AI Approach:
+Agent ko sirf logs nahi, balki "Contextual Metadata" bhi chahiye.
+
+Logic: Agent pehle kubectl describe pod chalaega events check karne ke liye, phir kubectl logs chalaega.
+
+Prompt Structure:
+
+"You are an SRE. Analyze these logs: [LOGS]. Compare with these events: [EVENTS]. Identify if the crash is due to: 1. Application Bug, 2. Missing Secret, or 3. Resource Constraint. Suggest a fix."
+
+☸️ Scenario 2: LangGraph for Self-Healing
+Goal: "Pending" pod ke liye Resource Quotas vs Node Affinity decide karna.
+
+📚 Prerequisites (Kya aana chahiye?):
+K8s Scheduling: How the Scheduler works (Taints, Tolerations, Affinity).
+
+LangGraph (Nodes & Edges): Agentic workflows mein Conditional Edges (If/Else logic for AI).
+
+Resource Management: Requests vs Limits aur Namespace-level quotas.
+
+🤖 Agentic AI Approach:
+Yahan Agent ek Decision Tree follow karta hai:
+
+Node A (Identify): Pod status is "Pending".
+
+Node B (Triage): AI describe events check karega.
+
+Edge (Logic):
+
+Agar event mein "Insufficient CPU" hai -> Go to Resource Quota Node.
+
+Agar event mein "0/N nodes available: node(s) didn't match pod affinity" hai -> Go to Affinity Check Node.
+
+☸️ Scenario 3: Semantic Cluster Search
+Goal: "Find pods with networking issues" bolne par AI kaise dhoondta hai?
+
+📚 Prerequisites (Kya aana chahiye?):
+Embeddings: Text ko mathematical vectors mein badalna.
+
+Vector Databases (RAG): K8s documentation aur error patterns ko store karna.
+
+Semantic vs Keyword Search: "Networking issue" aur "CNI failure" ka connection samajhna.
+
+🤖 Agentic AI Approach:
+AI "Grep" nahi karta, wo Meaning nikalta hai.
+
+Process: AI aapki query ("Networking issue") ko vector mein badalta hai aur use apne knowledge base se match karta hai. Use pata chalta hai ki networking ke liye use CoreDNS logs, Describe Services, aur Endpoints check karne hain. Wo ek saath 3-4 commands chala kar result summarize karta hai.
+
+☸️ Scenario 4: K8s Manifest Agent
+Goal: YAML indentation aur API versioning errors detect karna.
+
+📚 Prerequisites (Kya aana chahiye?):
+YAML Schema: API groups (apps/v1, networking.k8s.io).
+
+Pydantic / Validation: Python mein data ko validate karne ke rules.
+
+Few-Shot Prompting: AI ko correct vs incorrect manifest ke examples dikhana.
+
+🤖 Agentic AI Approach:
+Ye Agent ek "Linter" ki tarah kaam karta hai.
+
+Logic: Agent manifest ko read karta hai. Wo ek dry-run call simulate karta hai.
+
+Correction: Agar apiVersion: extensions/v1beta1 dikhta hai, toh AI ko pata hai (via Knowledge Base) ki version 1.16+ mein ye apps/v1 ho gaya hai. Wo automatically use replace karke aapko "Diff" dikhayega.
+
+☸️ Scenario 5: HPA Optimizer
+Goal: Grafana metrics dekh kar HPA limits suggest karna.
+
+📚 Prerequisites (Kya aana chahiye?):
+Metrics Server: CPU/Memory usage metrics.
+
+HPA Logic: Target Utilization % kaise kaam karta hai.
+
+Mathematical Reasoning: AI ko stats (Percentiles - P95, P99) samajhna aana chahiye.
+
+🤖 Agentic AI Approach:
+Agent ek Continuous Loop mein hota hai:
+
+Metric Fetcher: AI pichle 24 ghante ka average CPU load uthata hai.
+
+Analysis: AI dekha hai ki "Traffic spikes every day at 10 AM".
+
+Recommendation: AI suggest karta hai, "Bhai, minReplicas 2 se 5 kar do 10 AM ke liye, taaki latency na badhe."
+
+🧠 Summary for You:
+Bhai, ye sab banane ke liye aapko 3 Level par master banna hoga:
+
+Kubernetes Level: Bina K8s ki deep knowledge ke AI sirf hallucinate karega.
+
+GenAI Level: Prompting, RAG, aur Embeddings (Knowledge provide karne ke liye).
+
+Agentic Level: LangGraph ya CrewAI (AI ko "Decision" lene ke liye).
 ### 🛠️ Category 3: CI/CD & DevSecOps Automation
 11. **PR Review Agent:** GitHub Actions mein ek Agent lagana jo sirf code nahi, "Architectural Impact" bhi check kare.
 12. **Automated Documentation:** Har commit ke baad Swagger/ReadMe ko update karne wala Agentic workflow.
